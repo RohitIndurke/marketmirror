@@ -1,4 +1,4 @@
-import { Calendar, Home, Inbox, LineChart, Settings } from "lucide-react"
+import { Calendar, Home, Inbox, LineChart, Newspaper, Settings } from "lucide-react"
 
 import {
   Sidebar,
@@ -34,10 +34,16 @@ const items = [
     icon: LineChart,
   },
   {
+    title: "News",
+    url: "/news",
+    icon: Newspaper,
+  },
+  {
     title: "Settings",
     url: "#",
     icon: Settings,
-  },
+  }
+  
 ]
 
 export function AppSidebar() {

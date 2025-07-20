@@ -9,10 +9,11 @@ import {
 } from "@/components/ui/sidebar"
 import MobileTopNavbar from "@/components/MobileTopNavbar"
 import MobileBottomNavbar from "@/components/MobileBottomNavbar"
-
-
+import Footer from "@/components/Fotter"
+import Link from "next/link"
 
 const TradingViewWidget = dynamic(() => import("@/components/tradingview-widget"), { ssr: false })
+const coins = ["BTC", "ETH", "BNB", "SOL", "XRP", "DOGE", "ADA", "DOT", "AVAX", "LINK", "TAO"]
 
 export default function CoinPage() {
   const { symbol } = useParams()
@@ -22,23 +23,33 @@ export default function CoinPage() {
     <SidebarProvider>
       <AppSidebar />
       <SidebarInset>
-      <MobileTopNavbar />
-
+        <MobileTopNavbar />
         <div className="pt-16 pb-20 px-4">
           <h1 className="text-2xl font-bold mb-4">{coinSymbol} Chart</h1>
-          <TradingViewWidget symbol={coinSymbol} />
-          <div className="flex flex-1 flex-col gap-4 p-4" style={{fontSize:'30px'}}>
-              Also check related crypto&apos;s
-            </div>
 
-          <div className="flex flex-1 flex-col gap-4 p-4">
-          {Array.from({ length: 8 }).map((_, index) => (
-            <div
-              key={index}
-              className="bg-muted/50 aspect-video h-12 w-full rounded-lg"
-            />
-          ))}
+          <TradingViewWidget symbol={coinSymbol} />
+
+          <div className="text-2xl font-semibold mt-8 mb-4">
+            Also check related cryptos:
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+          {coins
+  .filter((c) => `${c}USDT` !== coinSymbol) // ignore current coin
+  .map((coinName, index) => {
+    const fullSymbol = `${coinName}USDT`; // correct symbol
+    return (
+      <Link key={index} href={`/crypto/${fullSymbol}`}>
+        <div className="p-4 bg-muted/50 rounded-lg hover:scale-105 transition cursor-pointer text-center font-medium text-lg">
+          {fullSymbol}
         </div>
+      </Link>
+    );
+  })}
+
+          </div>
+
+          <Footer />
         </div>
         <MobileBottomNavbar />
       </SidebarInset>

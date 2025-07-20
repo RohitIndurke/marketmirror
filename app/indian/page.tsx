@@ -1,3 +1,4 @@
+import Footer from "@/components/Fotter";
 import MobileBottomNavbar from "@/components/MobileBottomNavbar";
 import MobileTopNavbar from "@/components/MobileTopNavbar";
 import { AppSidebar } from "@/components/app-sidebar";
@@ -12,7 +13,9 @@ const indian =()=>{
     <MobileTopNavbar />
     <div className="indian">
         here is indian market 
+        
     </div>
+    <Footer/>
     <MobileBottomNavbar />
     </SidebarInset>
     </SidebarProvider>

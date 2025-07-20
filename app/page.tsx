@@ -7,6 +7,7 @@ import {
 } from "@/components/ui/sidebar"
 import MobileTopNavbar from "@/components/MobileTopNavbar"
 import MobileBottomNavbar from "@/components/MobileBottomNavbar"
+import Footer from "@/components/Fotter"
 
 
 
@@ -21,6 +22,7 @@ export default function Page() {
       Teeere nam kiya hai sab
       kindly<br></br> Just check only crypto page not more than that cuz is under construction u bitch 
     </div>
+    <Footer/>
     <MobileBottomNavbar />
     </SidebarInset>
     </SidebarProvider>

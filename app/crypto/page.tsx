@@ -1,96 +1,32 @@
 "use client"
 
-
 import Link from "next/link"
+import { useState, useEffect } from "react"
+import { AppSidebar } from "@/components/app-sidebar"
 import MobileTopNavbar from "@/components/MobileTopNavbar"
 import MobileBottomNavbar from "@/components/MobileBottomNavbar"
-import { AppSidebar } from "@/components/app-sidebar"
+import Footer from "@/components/Fotter"
 import {
   SidebarInset,
   SidebarProvider,
 } from "@/components/ui/sidebar"
-import { useState, useEffect } from "react"
-import {
-  LineChart,
-  Line,
-  ResponsiveContainer,
-  Tooltip,
-  YAxis,
-} from "recharts"
+import { getBinancePrices } from "@/lib/api/binance"
 
-const coins = [
-  "BTC", "ETH", "BNB", "SOL",
-  "XRP", "DOGE", "ADA", "DOT",
-  "AVAX", "LINK", "TAO",
-]
+const coins = ["BTC", "ETH", "BNB", "SOL", "XRP", "DOGE", "ADA", "DOT", "AVAX", "LINK", "TAO"]
 
-// --- Types ---
-type ChartPoint = {
-  time: string
-  value: number
-}
-
-type BinanceTicker = {
-  symbol: string
-  price: string
-}
-
-// --- Component ---
 export default function Page() {
   const [prices, setPrices] = useState<{ [key: string]: number }>({})
   const [prevPrices, setPrevPrices] = useState<{ [key: string]: number }>({})
-  const [chartData, setChartData] = useState<{ [key: string]: ChartPoint[] }>({})
 
-  // Fetch 12-hour line data (5-min interval)
-  const fetchChartData = async (symbol: string): Promise<ChartPoint[]> => {
-    try {
-      const res = await fetch(`https://api.binance.com/api/v3/klines?symbol=${symbol}&interval=5m&limit=144`)
-      const data: unknown = await res.json()
-
-      return (data as (string | number)[][]).map((d) => ({
-        time: new Date(d[0] as number).toLocaleTimeString([], {
-          hour: "2-digit",
-          minute: "2-digit",
-        }),
-        value: parseFloat(d[4] as string),
-      }))
-    } catch (error) {
-      console.error(`Error fetching 12hr chart for ${symbol}`, error)
-      return []
-    }
-  }
-
-  // Main useEffect to fetch prices & charts
   useEffect(() => {
-    const fetchPricesAndCharts = async () => {
-      try {
-        const res = await fetch("https://api.binance.com/api/v3/ticker/price")
-        const allData: BinanceTicker[] = await res.json()
-
-        const updatedPrices: { [key: string]: number } = {}
-        const updatedCharts: { [key: string]: ChartPoint[] } = {}
-
-        await Promise.all(coins.map(async (coin) => {
-          const symbol = `${coin}USDT`
-          const found = allData.find((item) => item.symbol === symbol)
-          if (found) {
-            updatedPrices[symbol] = parseFloat(found.price)
-          }
-
-          const chart = await fetchChartData(symbol)
-          updatedCharts[symbol] = chart
-        }))
-
-        setPrevPrices(prices)
-        setPrices(updatedPrices)
-        setChartData(updatedCharts)
-      } catch (err) {
-        console.error("Error fetching price or chart data", err)
-      }
+    const fetchData = async () => {
+      const updatedPrices = await getBinancePrices(coins)
+      setPrevPrices(prices)
+      setPrices(updatedPrices)
     }
 
-    fetchPricesAndCharts()
-    const interval = setInterval(fetchPricesAndCharts, 3000)
+    fetchData()
+    const interval = setInterval(fetchData, 3000)
     return () => clearInterval(interval)
   }, [prices])
 
@@ -99,14 +35,12 @@ export default function Page() {
       <AppSidebar />
       <SidebarInset>
         <MobileTopNavbar />
-        
         <div className="pt-16 pb-20 px-4">
           <div className="flex flex-1 flex-col gap-4 p-4">
             {coins.map((coin, index) => {
               const symbol = `${coin}USDT`
               const price = prices[symbol]
               const prev = prevPrices[symbol]
-              const chart = chartData[symbol] || []
 
               const isUp = price > prev
               const isDown = price < prev
@@ -116,54 +50,28 @@ export default function Page() {
                   key={index}
                   className="flex items-center justify-between bg-muted/100 p-4 rounded-lg shadow-sm"
                 >
-                  {/* Coin name */}
                   <Link href={`crypto/${symbol}`}>
                     <div className="text-base font-medium hover:underline cursor-pointer">
                       {coin}/USDT
                     </div>
                   </Link>
-
-                  {/* Line Graph */}
-                  <div className="w-32 h-10">
-                    <ResponsiveContainer width="100%" height="100%">
-                      <LineChart data={chart} margin={{ top: 5, bottom: 5 }}>
-                        <YAxis domain={["auto", "auto"]} hide />
-                        <Line
-                          type="monotone"
-                          dataKey="value"
-                          stroke="#4ade80"
-                          strokeWidth={2}
-                          dot={false}
-                          isAnimationActive={false}
-                        />
-                        <Tooltip
-                          wrapperStyle={{ fontSize: 10 }}
-                          contentStyle={{ backgroundColor: "#1a1a1a", border: "none" }}
-                          labelStyle={{ color: "#aaa" }}
-                        />
-                      </LineChart>
-                    </ResponsiveContainer>
-                  </div>
-
-                  {/* Live price & arrow */}
                   <div
-                    className={`text-sm font-semibold flex items-center gap-1 transition-all duration-500 ${
+                    className={`text-sm font-semibold transition-all duration-300 ${
                       isUp ? "text-green-500" : isDown ? "text-red-500" : "text-muted-foreground"
                     }`}
                   >
                     {price ? `$${price.toFixed(2)}` : "Loading..."}
-                    {isUp && <span>🔺</span>}
-                    {isDown && <span>🔻</span>}
+                    {isUp && <span> 🔺</span>}
+                    {isDown && <span> 🔻</span>}
                   </div>
                 </div>
               )
             })}
-        
+            <Footer />
           </div>
         </div>
         <MobileBottomNavbar />
       </SidebarInset>
     </SidebarProvider>
   )
-  
 }

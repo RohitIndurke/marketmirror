@@ -4,6 +4,7 @@ import MobileTopNavbar from "@/components/MobileTopNavbar"
 import MobileBottomNavbar from "@/components/MobileBottomNavbar"
 import { AppSidebar } from "@/components/app-sidebar"
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar"
+import Footer from "@/components/Fotter"
 
 type MF = { code: string; name: string; nav: string; date: string }
 
@@ -59,6 +60,7 @@ export default function MutualFundList() {
         </div>
       ))}
     </div>
+    <Footer/>
     <MobileBottomNavbar />
       </SidebarInset>
     </SidebarProvider>
