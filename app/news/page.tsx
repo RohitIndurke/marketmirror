@@ -9,16 +9,18 @@ import Newsbox from "@/components/Newsbox"
 
 
 
+
+
 const News = () =>{
 
     return(
         <SidebarProvider>
         <AppSidebar />
         <SidebarInset>
-          <MobileTopNavbar />
-            <Newsbox/>
-            <Newsbox/>
-            <Newsbox/>
+          <MobileTopNavbar  />
+          <div className="row">
+          <Newsbox/>
+          </div>
       <Footer/>
       <MobileBottomNavbar />
         </SidebarInset>
