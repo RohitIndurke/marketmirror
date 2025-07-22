@@ -19,8 +19,8 @@ export default function Page() {
     <SidebarInset>
     <MobileTopNavbar />
     <div className="indian">
-      Teeere nam kiya hai sab
-      kindly<br></br> Just check only crypto page not more than that cuz is under construction u bitch 
+      app is under work <br></br>
+      Where crypto ,news ,mutual fund are working
     </div>
     <Footer/>
     <MobileBottomNavbar />
