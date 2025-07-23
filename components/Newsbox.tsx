@@ -1,8 +1,8 @@
 "use client";
-
 import { useState, useEffect } from "react";
 import { Card } from "@/components/ui/card";
 import Link from "next/link";
+
 
 interface Article {
   title: string;
@@ -15,7 +15,7 @@ interface Article {
 
 const id = process.env.NEXT_PUBLIC_NEWSAPI_KEY;
 
-export default function Page() {
+function Page() {
   const [articles, setArticles] = useState<Article[]>([]);
 
   useEffect(() => {
@@ -38,10 +38,12 @@ export default function Page() {
             className="relative overflow-hidden rounded-xl shadow-lg bg-muted/30 h-[370px]"
           >
             <div className="absolute inset-0 z-0">
-              <img
-                src={article.image_url}
+            <img
+                src={ !article.image_url ? '/marketMirror.png':article.image_url}
                 alt="News image"
                 className="w-full h-full object-cover"
+                height={10}
+                width={20}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
             </div>
@@ -52,6 +54,8 @@ export default function Page() {
                   src={article.source_icon}
                   alt="Source logo"
                   className="w-8 h-8 absolute top-3 left-3 bg-white p-1 rounded shadow-md z-10"
+                  height={10}
+                width={20}
                 />
               </Link>
             )}
@@ -73,3 +77,4 @@ export default function Page() {
     </div>
   );
 }
+export default Page;

@@ -1,5 +1,6 @@
 import { Calendar, Home, Inbox, LineChart, Newspaper, Settings } from "lucide-react"
-
+import Image from 'next/image';
+import marketMirror from '@/public/marketMirror.png';
 import {
   Sidebar,
   SidebarContent,
@@ -51,7 +52,16 @@ export function AppSidebar() {
     <Sidebar>
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>MarketMirror</SidebarGroupLabel>
+        <SidebarGroupLabel className="flex justify-center mb-4">
+          <Image
+            src={marketMirror}
+            alt="Market Mirror Logo"
+            width={160}
+            height={44}
+            className="object-contain"
+          />
+        </SidebarGroupLabel>
+
           <SidebarGroupContent>
             <SidebarMenu>
               {items.map((item) => (
