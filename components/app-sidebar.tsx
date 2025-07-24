@@ -11,7 +11,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
-
+import Link from 'next/link';
 // Menu items.
 const items = [
   {
@@ -41,7 +41,7 @@ const items = [
   },
   {
     title: "Settings",
-    url: "#",
+    url: "/setting",
     icon: Settings,
   }
   
@@ -53,13 +53,14 @@ export function AppSidebar() {
       <SidebarContent>
         <SidebarGroup>
         <SidebarGroupLabel className="flex justify-center mb-4">
+          <Link href="/">
           <Image
             src={marketMirror}
             alt="Market Mirror Logo"
             width={160}
             height={44}
             className="object-contain"
-          />
+          /></Link>
         </SidebarGroupLabel>
 
           <SidebarGroupContent>
