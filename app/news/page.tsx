@@ -4,7 +4,7 @@ import MobileBottomNavbar from "@/components/MobileBottomNavbar"
 import { AppSidebar } from "@/components/app-sidebar"
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar"
 import Footer from "@/components/Fotter"
-import Newsbox from "@/components/Newsbox"
+import Newsbox from "@/app/news/Newsbox"
 
 
 
