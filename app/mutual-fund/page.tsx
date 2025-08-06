@@ -7,44 +7,38 @@ import MobileBottomNavbar from "@/components/MobileBottomNavbar";
 import MobileTopNavbar from "@/components/MobileTopNavbar";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import {useEffect,useState} from 'react'
-import FundCard from "./Fundcard";
+import Fundcard from "./Fundcard";
 
 interface Fund {
-  basic_info: {
-    fund_name: string;
-    fund_size: number;
-    risk_level: string;
-  };
-  nav_info: {
-    current_nav: number;
-  };
-  returns: {
-    cagr: {
-      '5y': number;
-    };
-  };
-  investment_info: {
-    mini_additional_investment: number;
-  };
+  fund_name: string;
+  latest_nav: number;
+  percentage_change: number;
+  asset_size: number;
+  star_rating?: number;
+  "1_month_return"?: number;
+  "3_month_return"?: number;
+  "6_month_return"?: number;
+  "1_year_return"?: number;
+  "3_year_return"?: number;
+  "5_year_return"?: number;
 }
 
+
 const FundsPage = () => {
-  const [funds, setFunds] = useState<Fund[]>([]);
+  const [funds, setFunds] = useState([]);
 
   useEffect(() => {
     const get = async () => {
       try {
-        const req = await fetch(
-          "https://stock.indianapi.in/mutual_funds_details?stock_name=",
-          {
-            headers: {
-              "X-Api-Key": process.env.NEXT_PUBLIC_MUTUAL_API || '',
-            },
-          }
-        );
+            const req = await fetch('https://stock.indianapi.in/mutual_funds', {
+                                    headers: {
+                                        'X-Api-Key': process.env.NEXT_PUBLIC_MUTUAL_API || '',
+                                    }
+                                })
         const data = await req.json();
-        console.log("API response:", data); 
-        setFunds([data]);
+        console.log(data.Debt["Corporate Bond"]);
+        setFunds(data.Debt["Corporate Bond"]);
+
 
       } catch (error) {
         console.error("Failed to fetch mutual fund data:", error);
@@ -59,16 +53,16 @@ const FundsPage = () => {
       <AppSidebar />
       <SidebarInset>
         <MobileTopNavbar />
-        {funds.map((fund, index) => (
-         <FundCard
-          key={index}
-          basic_info={fund.basic_info}
-          nav_info={fund.nav_info}
-          returns={fund.returns}
-          investment_info={fund.investment_info}
-          />
+        {funds.map((fund: Fund, index) => (
+  <Fundcard
+                key={index}
+                fund_name={fund.fund_name}
+                star_rating={fund.star_rating}
+                latest_nav={fund.latest_nav}
+                OneYearReturn={fund["1_year_return"]}
+                asset_size={fund.asset_size} percentage_change={0}  />
+))}
 
-        ))}
         <Footer />
         <MobileBottomNavbar />
       </SidebarInset>
