@@ -16,7 +16,6 @@ export default function RootLayout({
         />
       </head>
       <body>
-      <h1 className="text-xl font-bold p-4">Market Chart</h1>
         {children}
       </body>
     </html>

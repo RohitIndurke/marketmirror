@@ -30,7 +30,7 @@ function Page() {
 
   return (
     <div className="min-h-screen bg-background text-foreground p-6">
-      <h2 className="text-2xl font-bold mb-6">Indian Top News</h2>
+      <h2 className="text-2xl font-bold mb-10 mt-10">Indian Top News</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {articles.map((article, index) => (
           <Card

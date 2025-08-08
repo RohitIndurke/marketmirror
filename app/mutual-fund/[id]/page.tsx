@@ -14,7 +14,7 @@ const FundsPage = () => {
     <AppSidebar />
     <SidebarInset>
     <MobileTopNavbar />
-     <h1>Motilal Oswal Midcap Fund</h1>
+     
    
     <Footer/>
     <MobileBottomNavbar />

@@ -1,73 +1,67 @@
 
-"use client"
+  "use client"
 
-import { AppSidebar } from "@/components/app-sidebar";
-import Footer from "@/components/Fotter";
-import MobileBottomNavbar from "@/components/MobileBottomNavbar";
-import MobileTopNavbar from "@/components/MobileTopNavbar";
-import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
-import {useEffect,useState} from 'react'
+  import { AppSidebar } from "@/components/app-sidebar";
+  import Footer from "@/components/Fotter";
+  import MobileBottomNavbar from "@/components/MobileBottomNavbar";
+  import MobileTopNavbar from "@/components/MobileTopNavbar";
+  import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
+  import {useEffect,useState} from 'react'
 import Fundcard from "./Fundcard";
 
-interface Fund {
-  fund_name: string;
-  latest_nav: number;
-  percentage_change: number;
-  asset_size: number;
-  star_rating?: number;
-  "1_month_return"?: number;
-  "3_month_return"?: number;
-  "6_month_return"?: number;
-  "1_year_return"?: number;
-  "3_year_return"?: number;
-  "5_year_return"?: number;
+interface Fund{
+ meta :{
+    fund_house:string;
+isin_div_reinvestment:string | null;
+isin_growth: string | null;
+scheme_category: string;
+scheme_code: number;
+scheme_name:string;
+scheme_type: string;
+
+  },
+  data:{
+    nav:number | null;
+    date:string;
+  }[]
 }
 
+  const FundsPage = () => {
+    const [funds, setFunds] = useState<Fund[]>([]);
 
-const FundsPage = () => {
-  const [funds, setFunds] = useState([]);
+    const ids = [149456,122639,149456,148750,152755,152844,148458];
+    useEffect(() => {
+      const get = async () => {
+    const results = await Promise.all(
+      ids.map(async (id) => {
+        const res = await fetch(`https://api.mfapi.in/mf/${id}/latest`);
+        return res.json();
+      })
+    );
+    setFunds(results); // results will be an array of fund objects
+  };
 
-  useEffect(() => {
-    const get = async () => {
-      try {
-            const req = await fetch('https://stock.indianapi.in/mutual_funds', {
-                                    headers: {
-                                        'X-Api-Key': process.env.NEXT_PUBLIC_MUTUAL_API || '',
-                                    }
-                                })
-        const data = await req.json();
-        console.log(data.Debt["Corporate Bond"]);
-        setFunds(data.Debt["Corporate Bond"]);
+      get();
+    }, []);
 
+    return (
+      <SidebarProvider>
+        <AppSidebar />
+        <SidebarInset>
+          <MobileTopNavbar />
+           <h2 className="text-2xl font-bold mb-10 mt-17">Indian Top Mutual funs</h2>
+          {Array.isArray(funds) && funds.map((fund:Fund,index:number)=>(
+            
+              <Fundcard
+              key={index}
+              meta={fund.meta} 
+              data={fund.data}            />            
+          ))}
+          <Footer />
+          <MobileBottomNavbar />
+        </SidebarInset>
+      </SidebarProvider>
+    );
+  };
 
-      } catch (error) {
-        console.error("Failed to fetch mutual fund data:", error);
-      }
-    };
-
-    get();
-  }, []);
-
-  return (
-    <SidebarProvider>
-      <AppSidebar />
-      <SidebarInset>
-        <MobileTopNavbar />
-        {funds.map((fund: Fund, index) => (
-  <Fundcard
-                key={index}
-                fund_name={fund.fund_name}
-                star_rating={fund.star_rating}
-                latest_nav={fund.latest_nav}
-                OneYearReturn={fund["1_year_return"]}
-                asset_size={fund.asset_size} percentage_change={0}  />
-))}
-
-        <Footer />
-        <MobileBottomNavbar />
-      </SidebarInset>
-    </SidebarProvider>
-  );
-};
-
-export default FundsPage;
+  export default FundsPage;
