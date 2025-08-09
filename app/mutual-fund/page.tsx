@@ -1,67 +1,87 @@
+"use client";
 
-  "use client"
+import { AppSidebar } from "@/components/app-sidebar";
+import Footer from "@/components/Fotter";
+import MobileBottomNavbar from "@/components/MobileBottomNavbar";
+import MobileTopNavbar from "@/components/MobileTopNavbar";
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
+import { useEffect, useState } from "react";
+import FundCard from "./Fundcard";
 
-  import { AppSidebar } from "@/components/app-sidebar";
-  import Footer from "@/components/Fotter";
-  import MobileBottomNavbar from "@/components/MobileBottomNavbar";
-  import MobileTopNavbar from "@/components/MobileTopNavbar";
-  import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
-  import {useEffect,useState} from 'react'
-import Fundcard from "./Fundcard";
-
-interface Fund{
- meta :{
-    fund_house:string;
-isin_div_reinvestment:string | null;
-isin_growth: string | null;
-scheme_category: string;
-scheme_code: number;
-scheme_name:string;
-scheme_type: string;
-
-  },
-  data:{
-    nav:number | null;
-    date:string;
-  }[]
+interface Fund {
+  basic_info: {
+    fund_name: string;
+    fund_size: number;
+    risk_level: string;
+  };
+  nav_info: {
+    current_nav: number;
+  };
+  returns: {
+    cagr: {
+      "5y": number;
+    };
+  };
+  investment_info: {
+    mini_additional_investment: number;
+  };
 }
 
-  const FundsPage = () => {
-    const [funds, setFunds] = useState<Fund[]>([]);
+const FundsPage = () => {
+  const [funds, setFunds] = useState<Fund[]>([]);
+  const mutuals = ["SBI Small Cap Fund", 
+                    "Parag Parikh Flexi Cap Fund",
+                    "Tata Small Cap Fund",
+                    "Invesco India Smallcap Fund",
+                    "Motilal Oswal Midcap Fund",
+                    "Bandhan Small Cap Fund",
+                    "Nippon India Multi Cap Fund"
+                  ];
 
-    const ids = [149456,122639,149456,148750,152755,152844,148458];
-    useEffect(() => {
-      const get = async () => {
-    const results = await Promise.all(
-      ids.map(async (id) => {
-        const res = await fetch(`https://api.mfapi.in/mf/${id}/latest`);
-        return res.json();
-      })
-    );
-    setFunds(results); // results will be an array of fund objects
-  };
+  useEffect(() => {
+    const getFunds = async () => {
+      try {
+        const promises = mutuals.map(async (mutual) => {
+          const url = `https://stock.indianapi.in/mutual_funds_details?stock_name=${encodeURIComponent(mutual)}`;
+          const req = await fetch(url, {
+            headers: {
+              "X-Api-Key": process.env.NEXT_PUBLIC_MUTUAL_API || "",
+            },
+          });
+          const data = await req.json();
+          return data;
+        });
 
-      get();
-    }, []);
+        const results = await Promise.all(promises);
+        console.log(results);
+        setFunds(results);
+      } catch (error) {
+        console.error("Failed to fetch mutual fund data:", error);
+      }
+    };
 
-    return (
-      <SidebarProvider>
-        <AppSidebar />
-        <SidebarInset>
-          <MobileTopNavbar />
-           <h2 className="text-2xl font-bold mb-10 mt-17">Indian Top Mutual funs</h2>
-          {Array.isArray(funds) && funds.map((fund:Fund,index:number)=>(
-            
-              <Fundcard
-              key={index}
-              meta={fund.meta} 
-              data={fund.data}            />            
-          ))}
-          <Footer />
-          <MobileBottomNavbar />
-        </SidebarInset>
-      </SidebarProvider>
-    );
-  };
+    getFunds();
+  }, );
 
-  export default FundsPage;
+  return (
+    <SidebarProvider>
+      <AppSidebar />
+      <SidebarInset>
+        <MobileTopNavbar />
+        {funds.map((fund, index) => (
+          <FundCard
+            key={index}
+            basic_info={fund.basic_info}
+            nav_info={fund.nav_info}
+            returns={fund.returns}
+            investment_info={fund.investment_info}
+          />
+        ))}
+        <Footer />
+        <MobileBottomNavbar />
+      </SidebarInset>
+    </SidebarProvider>
+  );
+};
+
+export default FundsPage;
