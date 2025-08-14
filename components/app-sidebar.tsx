@@ -16,14 +16,38 @@ import {
 import Link from 'next/link'
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs"
 
-// Menu items
 const items = [
-  { title: "Home", url: "/", icon: Home },
-  { title: "Crypto Market", url: "/crypto", icon: Inbox },
-  { title: "Mutual funds", url: "/mutual-fund", icon: Calendar },
-  { title: "Indian Market", url: "/indian", icon: LineChart },
-  { title: "News", url: "/news", icon: Newspaper },
-  { title: "Settings", url: "/setting", icon: Settings },
+ {
+    title: "Home",
+    url: "./",
+    icon: Home,
+  },
+  {
+    title: "Crypto Market",
+    url: "./crypto",
+    icon: Inbox,
+  },
+  {
+    title: "Mutual funds",
+    url: "/mutual-fund",
+    icon: Calendar,
+  },
+  {
+    title: "Indian Market",
+    url: "/indian",
+    icon: LineChart,
+  },
+  {
+    title: "News",
+    url: "/news",
+    icon: Newspaper,
+  },
+  {
+    title: "Settings",
+    url: "/setting",
+    icon: Settings,
+  }
+
 ]
 
 export function AppSidebar() {
@@ -31,7 +55,6 @@ export function AppSidebar() {
     <Sidebar>
       <SidebarContent>
         <SidebarGroup>
-          {/* Logo */}
           <SidebarGroupLabel className="flex justify-center mb-4">
             <Link href="/">
               <Image
@@ -45,9 +68,7 @@ export function AppSidebar() {
           </SidebarGroupLabel>
 
           <SidebarGroupContent>
-            <SidebarMenu>
-              {/* Menu items */}
-              {items.map((item) => (
+            <SidebarMenu>              {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
                     <Link href={item.url}>
@@ -58,7 +79,6 @@ export function AppSidebar() {
                 </SidebarMenuItem>
               ))}
 
-              {/* Profile menu item */}
               <SidebarMenuItem>
                 <SidebarMenuButton>
                   <SignedOut>
