@@ -61,7 +61,7 @@ const FundsPage = () => {
     };
 
     getFunds();
-  }, );
+  },[] );
 
   return (
     <SidebarProvider>
