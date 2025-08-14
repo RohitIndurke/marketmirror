@@ -11,7 +11,7 @@ import {
   SidebarGroupLabel,
   SidebarMenu,
   SidebarMenuButton,
-  SidebarMenuItem,
+  SidebarMenuItem, 
 } from "@/components/ui/sidebar"
 import Link from 'next/link'
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs"
