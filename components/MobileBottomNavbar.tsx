@@ -1,11 +1,13 @@
 "use client"
 
-import { Home, Coins, LineChart, User,Calendar, Newspaper } from "lucide-react"
+import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs"
+import { Home, Coins, LineChart, Calendar, Newspaper, User } from "lucide-react"
 import Link from "next/link"
 
 export default function MobileBottomNavbar() {
   return (
     <nav className="fixed bottom-0 left-0 right-0 z-50 bg-background backdrop-blur border-t shadow md:hidden flex items-center justify-around h-14 px-4">
+      
       <Link href="/" className="flex flex-col items-center text-xs">
         <Home className="w-5 h-5" />
         Home
@@ -26,11 +28,25 @@ export default function MobileBottomNavbar() {
         <Newspaper className="w-5 h-5" />
         News
       </Link>
-      <Link href="/user" className="flex flex-col items-center text-xs">
-        <User className="w-5 h-5" />
-        Profile
-      </Link>
-      
+
+      {/* Profile section */}
+      <div className="flex flex-col items-center text-xs">
+        <SignedOut>
+          <SignInButton mode="modal">
+            <div className="flex flex-col items-center cursor-pointer">
+              <User className="w-5 h-5" />
+              Sign in
+            </div>
+          </SignInButton>
+        </SignedOut>
+
+        <SignedIn>
+          <div className="flex flex-col items-center">
+            <UserButton />
+            profile
+          </div>
+        </SignedIn>
+      </div>
     </nav>
   )
 }

@@ -47,7 +47,7 @@ const FundCard = ({basic_info,nav_info,returns,investment_info}:Fund) => {
         <div className="grid grid-cols-4 gap-5 w-full text-sm text-white">
           <div>
             <p className="text-gray-400">NAV</p>
-            <p>₹{nav_info.current_nav}</p>
+            <p>₹{nav_info.current_nav.toFixed(2)}</p>
           </div>
           <div>
             <p className="text-gray-400">1 Year Return</p>
