@@ -68,6 +68,10 @@ const FundsPage = () => {
       <AppSidebar />
       <SidebarInset>
         <MobileTopNavbar />
+         <div className="items-center">
+            <a className="text-white-500 text-center text-2xl text-green-400 font-sans font-xl ">Mutual Fund Insights</a><br/>
+            <a className="text-white-500 text-center text-mg font-semibold">Compare returns, risks, and allocation of top Indian funds</a>
+          </div>
         {funds.map((fund, index) => (
           <FundCard
             key={index}

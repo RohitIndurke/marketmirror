@@ -1,27 +1,28 @@
+"use client"
 
 const NiftyDatas=[
   {
-    name : "NIFTY 50",
+    name : "NIFTY50",
     price: 24000
   },
   {
-    name : "NIFTY BANK",
+    name :  "BANKNIFTY",
     price: 24000
   },
   {
-    name : "NIFTY IT",
+    name : "NIFTYIT",
     price: 24000
   },
   {
-    name : "NIFTY FMCG",
+    name : "NIFTYFMCG",
     price: 24000
   },
   {
-    name : "NIFTY MIDCAP",
+    name : "MIDCAP",
     price: 24000
   },
   {
-    name : "NIFTY PHARMA",
+    name : "NIFTYPHARMA",
     price: 24000
   },
   {
@@ -33,18 +34,59 @@ const NiftyDatas=[
     price: 24000
   },
   {
-    name : "NIFTY",
+    name : "NIFTYAUTO",
     price: 24000
+  },
+];
+
+const GlobeDatas = [
+  {
+    "emo": "🇺🇸",
+    "name": "DOW JONES",
+    "price": "44,969.03"
   },
   {
-    name : "NIFTY AUTO",
-    price: 24000
+    "emo": "🇺🇸",
+    "name": "S&P 500",
+    "price": "6,445.08"
   },
-]
+  {
+    "emo": "🇺🇸",
+    "name": "NASDAQ",
+    "price": "21,585.28"
+  },
+  {
+    "emo": "🇯🇵",
+    "name": "NIKKEI 225",
+    "price": "43,714.31"
+  },
+  {
+    "emo": "🇭🇰",
+    "name": "HANG SENG",
+    "price": "25,176.85"
+  },
+  {
+    "emo": "🇩🇪",
+    "name": "DAX",
+    "price": "24,266.49"
+  },
+  {
+    "emo": "🇫🇷",
+    "name": "CAC 40",
+    "price": "7,870.63"
+  },
+  {
+    "emo": "🇰🇷",
+    "name": "KOSPI",
+    "price": "3,177.28"
+  }
+];
+
+
 export default function Page() {
   return (
     <div>          
-      <h3><b className="ml-3 font-mono">Indian Index</b></h3>
+      <h3><b className="ml-3 font-mono">Indian Index 🇮🇳📈</b></h3>
     <div className="overflow-hidden">
         <div className="animate-scroll flex whitespace-nowrap">
       {NiftyDatas.map((Nifty,index)=>(
@@ -56,41 +98,26 @@ export default function Page() {
         
         </div>
       ))}
+        </div>
       </div>
-      </div>
-  
+
   
 
-<h3><b  className="ml-3">Global Index</b></h3>
+<h3><b className="ml-3">Global Index 🌍📊</b></h3>
 <div className="overflow-hidden">
-<div className="animate-scroll flex whitespace-nowrap">
-  <span className="inline-block px-4 py-2 mr-10 border border-red-700 rounded  text-sm">
-   🇺🇸  DOWN FUTURE $XXX.XX
-  </span>
-  <span className="inline-block px-4 py-2 mr-10 border border-green-700 rounded  text-sm">
-  🇺🇸  DOW $XXX.XX
-  </span>
-  <span className="inline-block px-4 py-2 mr-10 border border-red-700 rounded  text-sm">
-   🇺🇸   S & P 500 $XXX.XX
-  </span>
-  <span className="inline-block px-4 py-2 mr-10 border border-green-700 rounded  text-sm">
-    🇯🇵    NIKKEI $XXX.XX
-  </span>
-  <span className="inline-block px-4 py-2 mr-10 border border-red-700 rounded  text-sm">
-    🇻🇳    HANG SING $XXX.XX
-  </span>
-  <span className="inline-block px-4 py-2 mr-10 border border-red-700 rounded  text-sm">
-  🇩🇪    DAX $XXX.XX
-  </span>
-  <span className="inline-block px-4 py-2 mr-10 border border-red-700 rounded  text-sm">
-  🇫🇷    CAC $XXX.XX
-  </span>
-  <span className="inline-block px-4 py-2 mr-10 border border-red-700 rounded  text-sm">
-   🇰🇷  KISPI $XXX.XX
-  </span>
-</div>
-</div>
-    </div>
+        <div className="animate-scroll flex whitespace-nowrap">
+      {GlobeDatas.map((GlobeData,index)=>(
+        <div  key={index }>
+        
+          <a className="inline-block px-4 py-2 mr-10 rounded  text-sm">
+           {GlobeData.name}{GlobeData.emo} ${GlobeData.price} 
+          </a>
+        
+        </div>
+      ))}
+      </div>
+      </div>
   
+</div>
   )
 }

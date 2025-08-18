@@ -30,7 +30,10 @@ function Page() {
 
   return (
     <div className="min-h-screen bg-background text-foreground p-6">
-      <h2 className="text-2xl font-bold mb-10 mt-10">Indian Top News</h2>
+      <div className="items-center mb-5 ">
+            <a className="text-white-500 text-center text-2xl text-green-400 font-sans font-xl tracking-tight">Market News & Updates</a><br/>
+            <a className="text-white-500 text-center text-small font-semibold">Stay informed with the latest financial headlines and trends</a>
+          </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {articles.map((article, index) => (
           <Card
@@ -66,7 +69,7 @@ function Page() {
               <Link
                 href={article.link}
                 target="_blank"
-                className="text-sm text-blue-400 hover:underline mt-2 inline-block"
+                className="text-sm text-green-400 hover:underline mt-2 inline-block"
               >
                 Read More →
               </Link>

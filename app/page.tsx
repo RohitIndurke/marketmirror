@@ -10,7 +10,7 @@ import NiftyCard from "@/components/NiftyCard"
 import SectorCard from "@/components/SectorCard";
 import InvestmentCard from "@/components/InvestmentCard";
 
-export default function Page() {
+const Page = ()=> {
   const {isSignedIn,user} = useUser();
 
   let session;
@@ -69,3 +69,4 @@ export default function Page() {
   
   )
 }
+export default Page;

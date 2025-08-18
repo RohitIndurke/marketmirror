@@ -15,9 +15,10 @@ const indian =()=>{
     <AppSidebar />
     <SidebarInset>
     <MobileTopNavbar />
-    <div className="indian">
-        here is indian market  
-    </div>
+    <div className="items-center mb-5 ">
+            <a className="text-white-500 text-center text-2xl text-green-400 font-sans font-xl tracking-tight">Indian Market Overview</a><br/>
+            <a className="text-white-500 text-center text-small font-semibold">Explore sector-wise trends shaping India’s economy</a>
+          </div>
     <Footer/>
     <MobileBottomNavbar />
     </SidebarInset>

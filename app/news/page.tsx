@@ -18,6 +18,7 @@ const News = () =>{
         <AppSidebar />
         <SidebarInset>
           <MobileTopNavbar  />
+           
           <div className="row">
           <Newsbox/>
           </div>

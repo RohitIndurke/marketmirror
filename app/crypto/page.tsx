@@ -35,8 +35,13 @@ export default function Page() {
       <AppSidebar />
       <SidebarInset>
         <MobileTopNavbar />
-        <div className="pt-16 pb-20 px-4">
-          <div className="flex flex-1 flex-col gap-4 p-4">
+        <div className="pt-8 pb-20 px-4">
+          <div className="items-center">
+            <a className="text-white-500 text-center text-2xl text-green-400 font-sans font-medium tracking-tight">Live Crypto Prices</a><br/>
+            <a className="text-white-500 text-center text-base font-semibold">Stay Ahead with Live Market Updates</a>
+          </div>
+          
+            <div className="flex flex-1 flex-col gap-4 p-4">
             {coins.map((coin, index) => {
               const symbol = `${coin}USDT`
               const price = prices[symbol]

@@ -1,55 +1,86 @@
 import { PieChart, Pie, Cell, ResponsiveContainer} from "recharts"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-// Pie chart data
 const sectorDatas = [
-  { 
-    name: "IT", 
-    value: 400, 
-    color: "#0088FE"
- },
   {
-     name: "Pharma",
-      value: 300, 
-      color: "#00C49F" 
-    },
-  { 
-    name: "Banking",
-     value: 300, 
-     color: "#FFBB28" 
-    },
-  { 
+    name: "Fin. Serv.",
+    value: 37.32,
+    percentage: "37.32%",
+    color: "#76B900" // NVIDIA Green
+  },
+  {
+    name: "IT",
+    value: 11.16,
+    percentage: "11.16%",
+    color: "#8CC63F" // Fresh Green
+  },
+  {
     name: "Energy",
-     value: 200,
-    color: "#FF8042" 
-},
+    value: 10.53,
+    percentage: "10.53%",
+    color: "#A4D65E" // Soft Green
+  },
   {
-    name: "Green Energy", 
-    value: 300, 
-    color: "#383432ff" 
-}
-]
+    name: "Auto",
+    value: 7.02,
+    percentage: "7.02%",
+    color: "#b7e683ff" // Light Green
+  },
+  {
+    name: "FMCG",
+    value: 6.46,
+    percentage: "6.46%",
+    color: "#bbebaaff" // Very Light Green
+  },
+  {
+    name: "Other",
+    value: 19.06,
+    percentage: "19.06%",
+    color: "#ccf1aaff " // Neutral Gray
+  },
+  {
+    name: "Telecommunication",
+    value: 4.65,
+    percentage: "4.65%",
+    color: "#d1f0baff" // Darker Gray
+  },
+  {
+    name: "Construction",
+    value: 3.80,
+    percentage: "3.80%",
+    color: "#FFFFFF" // White
+  }
+];
+
+
+
+
+
+
 const SectorCard = () => {
     return(
-  <Card className="p-2 h-[180px] w-[220px] shadow-md rounded-xl relative">
+  <Card className="p-2 h-[250px] w-[345px] shadow-md rounded-xl relative">
     <CardHeader className="p-2">
-      <CardTitle className="text-sm">Sector Holdings</CardTitle>
+      <CardTitle className="text-sm text-left">NIFTY50 Sector Holdings🏢</CardTitle>
     </CardHeader>
     <CardContent className="relative">
-      <ResponsiveContainer width="100%" height={100}>
+      <ResponsiveContainer width="100%" height={140}>
         <PieChart>
           <Pie
             data={sectorDatas}
-            cx="70%"
-            cy="40%"
-            outerRadius={40}
-            innerRadius={20}
+            cx="75%"
+            cy="49.8%"
+            outerRadius={70}
+            innerRadius={35}
             dataKey="value"
           >
-            <Cell fill="#0088FE" />
-            <Cell fill="#00C49F" />
-            <Cell fill="#FFBB28" />
-            <Cell fill="#FF8042" />
-            <Cell fill="#383432ff" />
+              <Cell fill={sectorDatas[0].color} /> 
+              <Cell fill={sectorDatas[1].color} /> 
+              <Cell fill={sectorDatas[2].color} />
+              <Cell fill={sectorDatas[3].color} />
+              <Cell fill={sectorDatas[4].color} /> 
+              <Cell fill={sectorDatas[5].color} />
+              <Cell fill={sectorDatas[6].color} /> 
+              <Cell fill={sectorDatas[7].color} /> 
           </Pie>
         </PieChart>
       </ResponsiveContainer>
@@ -60,7 +91,7 @@ const SectorCard = () => {
                 className="w-2 h-2 rounded-full"
                 style={{backgroundColor:sector.color}}>
                 </span>
-                {sector.name}
+                {sector.name}   {sector.percentage}
             </div>
         ))}
         </div>
