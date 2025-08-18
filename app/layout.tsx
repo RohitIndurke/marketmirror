@@ -20,7 +20,7 @@ export default function RootLayout({
           strategy="afterInteractive"
         />
       </head>
-       <body>
+       <body className="font-mono">
           <header className="flex justify-end items-center p-4 gap-4 h-16">
            
             <SignedIn>

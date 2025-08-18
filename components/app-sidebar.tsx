@@ -1,6 +1,6 @@
 "use client"
 
-import { Calendar, Home, Inbox, LineChart, Newspaper, Settings, User } from "lucide-react"
+import { Calendar, Home, Inbox, LineChart, Newspaper, User } from "lucide-react"
 import Image from 'next/image'
 import marketMirror from '@/public/marketMirror.png'
 import {
@@ -41,11 +41,6 @@ const items = [
     title: "News",
     url: "/news",
     icon: Newspaper,
-  },
-  {
-    title: "Settings",
-    url: "/setting",
-    icon: Settings,
   }
 
 ]

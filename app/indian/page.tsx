@@ -16,8 +16,7 @@ const indian =()=>{
     <SidebarInset>
     <MobileTopNavbar />
     <div className="indian">
-  
-        
+        here is indian market  
     </div>
     <Footer/>
     <MobileBottomNavbar />
