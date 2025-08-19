@@ -1,12 +1,14 @@
-import { clerkMiddleware } from "@clerk/nextjs/server";
+import {  clerkMiddleware, createRouteMatcher} from "@clerk/nextjs/server";
 
-// In dev mode, skip protecting routes
+const isPublicRoute = createRouteMatcher([
+  "/", 
+])
 export default clerkMiddleware(async (auth, req) => {
-  if (process.env.NODE_ENV === "production") {
-    await auth.protect(); // only protect in production
-  } else {
-    // developer mode: allow everything
+  if (process.env.NODE_ENV !== "production") {
     return;
+  }
+  if(!isPublicRoute(req)){
+    await auth.protect();
   }
 });
 
