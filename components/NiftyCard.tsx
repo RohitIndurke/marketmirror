@@ -6,65 +6,65 @@ import { Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "rec
 const lineData = [
   { 
     name: "Jan",
-     value: 110, 
-     altValue: 0
+     investment: 110, 
+     nifty: 0
      },
   { 
     name: "Feb", 
-    value: 70, 
-    altValue: 10
+    investment: 70, 
+    nifty: 10
    },
   { 
     name: "Mar", 
-    value: 90, 
-    altValue: 20 
+    investment: 90, 
+    nifty: 20 
   },
   { 
     name: "Apr", 
-    value: 140, 
-    altValue: 50
+    investment: 140, 
+    nifty: 50
    },
   {
      name: "May",
-      value: 89,
-       altValue: 80
+      investment: 89,
+       nifty: 80
    },
   { 
     name: "Jun",
-     value: 190,
-      altValue: 150
+     investment: 190,
+      nifty: 150
      },
   { 
     name: "Jul",
-    value: 80,
-     altValue: 110
+    investment: 80,
+     nifty: 110
      },
      { 
     name: "Aug",
-     value: 40,
-      altValue: 100
+     investment: 40,
+      nifty: 100
     
     },
   { 
     name: "Sep",
-     value: 120,
-      altValue: 100
+     investment: 120,
+      nifty: 100
     
     },
   { 
     name: "Oct",
-     value: 90,
-      altValue: 95
+     investment: 90,
+      nifty: 95
      },
   { 
     name: "Nov",
-     value: 140,
-      altValue: 105
+     investment: 140,
+      nifty: 105
      },
   { 
     name: "Dec",
-     value: 19,
-      altValue: 60
+     investment: 19,
+      nifty: 60
      }
 ]
 
@@ -82,9 +82,9 @@ return(
           <XAxis dataKey="name" stroke="#888" fontSize={10} />
           <YAxis hide />
           <Tooltip />
-          <Line type="monotone" dataKey="value" stroke="#ecf3f7ff" dot={{ r: 2 }} />
+          <Line type="monotone" dataKey="investment" stroke="#299cdeff" dot={{ r: 2 }} />
           {/* ✅ Added second line */}
-          <Line type="monotone" dataKey="altValue" stroke="#25d61fff" dot={{ r: 2 }} />
+          <Line type="monotone" dataKey="nifty" stroke="#25d61fff" dot={{ r: 2 }} />
         </LineChart>
       </ResponsiveContainer>
     </CardContent>
