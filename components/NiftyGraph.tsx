@@ -69,7 +69,7 @@ const lineData = [
 ]
 
 
-const NiftyCard = () => {
+const NiftyGraph = () => {
 
 return(
     <Card className="p-2 h-[250px] w-[345px] shadow-md rounded-xl">
@@ -91,4 +91,4 @@ return(
   </Card>
 ) 
 }
-export default NiftyCard;
+export default NiftyGraph;

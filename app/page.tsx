@@ -2,17 +2,17 @@
 import Footer from "@/components/Fotter";
 import MobileBottomNavbar from "@/components/MobileBottomNavbar";
 import MobileTopNavbar from "@/components/MobileTopNavbar";
-import Slider from "@/components/Slider";
 import { AppSidebar } from "@/components/app-sidebar";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { SignInButton,useUser } from "@clerk/nextjs";
-import NiftyCard from "@/components/NiftyCard"
 import SectorCard from "@/components/SectorCard";
+import RealSectorCard from "@/components/RealSectorCard";
 import InvestmentCard from "@/components/InvestmentCard";
+import NiftyGraph from "@/components/NiftyGraph";
 
 const Page = ()=> {
   const {isSignedIn,user} = useUser();
-
+  let defaultNifty;
   let session;
   if(!isSignedIn){
     session=(
@@ -32,6 +32,32 @@ const Page = ()=> {
       </div>
     );
   }
+  if(!isSignedIn){
+    defaultNifty=(
+      <div className="flex justify-center items-center py-16">
+  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+    
+    <NiftyGraph />
+    <SectorCard />
+    <InvestmentCard />
+  </div>
+</div>
+    );
+  }
+  else{
+    defaultNifty=(
+      <div className="flex justify-center items-center py-16">
+  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+    
+    
+    
+    <NiftyGraph />
+    <SectorCard />
+    <RealSectorCard />
+  </div>
+</div>
+    );
+  }
 
   return (
     <div >
@@ -49,16 +75,9 @@ const Page = ()=> {
     </div>
     {/* khali session function call kely for jr user login asel tr nav desel nytr sign button */}
     {session}
-    
-<div className="flex justify-center items-center py-16">
-  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-    <NiftyCard />
-    <SectorCard />
-    <InvestmentCard />
-  </div>
-</div>
+    {defaultNifty}
       </div>
-    <Slider/> 
+    
       <Footer/>
     <MobileBottomNavbar />
     </SidebarInset>
