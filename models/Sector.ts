@@ -5,6 +5,7 @@ const sectorShema = new Schema({
     value:Number,
     percentage:String,
     color:String,
+    clerkId:String
 });
 const Sector = models.Sector || model("Sector",sectorShema);
 export default Sector;
