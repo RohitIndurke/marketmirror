@@ -18,7 +18,7 @@ export const GET = async () =>{
         return NextResponse.json({error:"fail to fetch data from database"},{status:500})
     }
 }
-export const POST = async (req:any) =>{
+export const POST = async (req:Request) =>{
     try{
     await connectDB();
     const body = await req.json();

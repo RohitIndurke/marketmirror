@@ -13,7 +13,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { useEffect, useState } from "react"
-import { useUser,SignedIn } from "@clerk/nextjs";
+import { useUser} from "@clerk/nextjs";
 
 interface Invest {
   _id: string,
@@ -24,7 +24,7 @@ interface Invest {
   clerkId?:string,
 }
 export default function DialogDemo() {
-    const {user} = useUser();
+{/*    const {user} = useUser();*/}   
     const [invests,setInvest] = useState<Invest[]>([]);
     const [name,setName] =useState("");
     const [percentage,setPercentage] =useState("");
