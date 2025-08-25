@@ -2,6 +2,7 @@
 import { PieChart, Pie, Cell, ResponsiveContainer} from "recharts"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import {useState,useEffect} from 'react'
+import  Dialog  from "@/components/Dialog";
 
 interface Invest {
   _id: string,
@@ -31,7 +32,8 @@ useEffect(()=>{
     return(
   <Card className="p-2 h-[250px] w-[345px] shadow-md rounded-xl relative">
     <CardHeader className="p-2">
-      <CardTitle className="text-sm text-left">Personal Holdings💼</CardTitle>
+      <CardTitle className="text-sm text-left flex"><a className="flex-2">Personal Holdings💼</a>
+      <a className="text-right flex-2"><Dialog/></a></CardTitle>
     </CardHeader>
     <CardContent className="relative">
       <ResponsiveContainer width="100%" height={140}>
