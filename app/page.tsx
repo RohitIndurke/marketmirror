@@ -12,18 +12,32 @@ import NiftyGraph from "@/components/NiftyGraph";
 
 const Page = ()=> {
   const {isSignedIn,user} = useUser();
-  let defaultNifty;
-  let session;
+  let session,session1,defaultNifty;
+
   if(!isSignedIn){
     session=(
-      <div className="flex justify-center">
-  <div className="bg-white text-gray-900 w-80 h-10 flex items-center justify-center rounded-xl">
-    <SignInButton />
-  </div>
-</div>
+            <div className="flex justify-center">
+                <div className="bg-white text-gray-900 w-80 h-10 flex items-center justify-center rounded-xl">
+                <SignInButton />
+              </div>
+          </div>
+      );
 
+    defaultNifty=(
+                    <div className="flex justify-center items-center py-16">
+                       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                       <NiftyGraph />
+                        <SectorCard />
+                       <InvestmentCard />
+                       </div>
+                      </div>
+                    );
+    session1=(
+        <div className=" text-2xl pt-1 pb-1 text-white-900 font-serif">Sign up to unlock the true health & growth potential of your portfolio 🚀
+      </div>
+    )
 
-    );
+    
   }
   else{
     session=(
@@ -31,33 +45,23 @@ const Page = ()=> {
         👋🏻 Hello, {user?.firstName || "User"}
       </div>
     );
-  }
-  if(!isSignedIn){
     defaultNifty=(
       <div className="flex justify-center items-center py-16">
   <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-    
-    <NiftyGraph />
-    <SectorCard />
-    <InvestmentCard />
-  </div>
-</div>
-    );
-  }
-  else{
-    defaultNifty=(
-      <div className="flex justify-center items-center py-16">
-  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-    
-    
-    
     <NiftyGraph />
     <SectorCard />
     <RealSectorCard />
   </div>
 </div>
     );
+
+    session1=(
+      <div className="text-lg font-bold text-white mt-2 text-center">
+      here is data
+      </div>
+    );
   }
+ 
 
   return (
     <div >
@@ -76,6 +80,7 @@ const Page = ()=> {
     {/* khali session function call kely for jr user login asel tr nav desel nytr sign button */}
     {session}
     {defaultNifty}
+    {session1}
       </div>
     
       <Footer/>
