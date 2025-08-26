@@ -8,9 +8,7 @@ export const GET = async () =>{
     try{
     await connectDB();
     const {userId:clerkId}= await auth();
-    console.log("here is id",clerkId);
-
-    const sectors = await Sector.find({});
+    const sectors = await Sector.find({clerkId});
     return NextResponse.json(sectors)
     }
     catch(error){
@@ -21,8 +19,18 @@ export const GET = async () =>{
 export const POST = async (req:Request) =>{
     try{
     await connectDB();
+    const {userId} = await auth();
+    if(!userId){
+        return NextResponse.json({error: "Login first"},{status:401})
+    }
     const body = await req.json();
-    const newSector = await Sector.create(body)
+    const newSector = await Sector.create({
+        name:body.name,
+        percentage:body.percentage,
+        value:body.value,
+        color:body.color,
+        clerkId:userId,
+    });
      return NextResponse.json(newSector,{status:201})
     }
     catch(error){
@@ -30,3 +38,20 @@ export const POST = async (req:Request) =>{
         return NextResponse.json({error:"faild to insert "},{status:500});
     }
 };
+
+export const DELETE =async (req:Request)=>{
+        try{
+            await connectDB();
+            const {_id} =await req.json();
+            if(!_id){
+                console.error("Unexpected error,id of sector not found",{status:404});
+            }
+            await Sector.deleteOne({_id});
+            return NextResponse.json({message:"Data deletion done"});
+        }
+        catch(error){
+
+             console.error("Unable to delete data",error);
+            return NextResponse.json({error:"not able to delete data"},{status:500})
+        }
+}
