@@ -13,7 +13,6 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { useEffect, useState } from "react"
-import { useUser} from "@clerk/nextjs";
 
 interface Invest {
   _id: string,
