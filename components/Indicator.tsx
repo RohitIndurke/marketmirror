@@ -4,20 +4,18 @@ import { useEffect, useState } from "react";
 
 const Indicator = () => {
   let value;
-  
-  const [data, setData] = useState([]);
+
   const [totalHolding, setTotalHolding] = useState(0);
 
-  useEffect(()=>{
-    const get = async() =>{
-        const req = await fetch("/api/sector");
-        const data = await req.json();
-        console.log(totalHolding); 
-        setData(data);
-        setTotalHolding(data.length);
-    }
+  useEffect(() => {
+    const get = async () => {
+      const req = await fetch("/api/sector");
+      const data = await req.json();
+      console.log("Here is total sector holdings:",totalHolding);
+      setTotalHolding(data.length);
+    };
     get();
-  },[])
+  }, []);
 
   if (totalHolding == 0) {
     value = [2];
@@ -34,7 +32,6 @@ const Indicator = () => {
   } else {
     value = [2];
   }
-
 
   return (
     <div className="items-center justify-center flex flex-col">
