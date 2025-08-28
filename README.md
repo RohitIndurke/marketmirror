@@ -18,7 +18,7 @@
  ![ShadCN UI](https://img.shields.io/badge/ShadCN_UI-ffffff?style=for-the-badge&logo=appveyor&logoColor=black) 
  ![Clerk](https://img.shields.io/badge/Clerk-ffffff?style=for-the-badge&logo=clerk&logoColor=black) 
  ![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white) 
-
+![MongoDB Atlas](https://img.shields.io/badge/MongoDB%20Atlas-47A248?style=for-the-badge&logo=mongodb&logoColor=white)
 ---
 
 ## Getting Started
@@ -39,7 +39,7 @@ NEXT_PUBLIC_MUTUAL_API=mutual_fund_api_key
 DATABASE_URL=your_neon_connection_string
 CLERK_SECRET_KEY=clerk_key
 NEXT_PUBLIC_CLERK_FRONTEND_API=your_clerk_frontend_api
-
+MONGO_DB_URL=mongo_db_cluster_url
 ```
 
 4. **Run the development server**
