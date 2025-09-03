@@ -1,7 +1,7 @@
 "use client"
 
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs"
-import { Home, Coins, LineChart, Calendar, Newspaper, User } from "lucide-react"
+import { Home, Coins, Calendar, Newspaper, User } from "lucide-react"
 import Link from "next/link"
 
 export default function MobileBottomNavbar() {
@@ -15,10 +15,6 @@ export default function MobileBottomNavbar() {
       <Link href="/crypto" className="flex flex-col items-center text-xs">
         <Coins className="w-5 h-5" />
         Crypto
-      </Link>
-      <Link href="/indian" className="flex flex-col items-center text-xs">
-        <LineChart className="w-5 h-5" />
-        Indian
       </Link>
       <Link href="/mutual-fund" className="flex flex-col items-center text-xs">
         <Calendar className="w-5 h-5" />

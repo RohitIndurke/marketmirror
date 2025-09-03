@@ -1,6 +1,6 @@
 "use client"
 
-import { Calendar, Home, Inbox, LineChart, Newspaper, User } from "lucide-react"
+import { Calendar, Home, Inbox, Newspaper, User } from "lucide-react"
 import Image from 'next/image'
 import marketMirror from '@/public/marketMirror.png'
 import {
@@ -31,11 +31,6 @@ const items = [
     title: "Mutual funds",
     url: "/mutual-fund",
     icon: Calendar,
-  },
-  {
-    title: "Indian Market",
-    url: "/indian",
-    icon: LineChart,
   },
   {
     title: "News",

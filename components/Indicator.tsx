@@ -36,6 +36,7 @@ const Indicator = () => {
   return (
     <div className="items-center justify-center flex flex-col">
       <h3 className="text-lg ">Risk Indicator</h3>
+      <h3 className="text-sm ">Total Sector {totalHolding} </h3>
       <div className="w-full m-3">
         <Slider value={value} max={4} step={1} />
       </div>
