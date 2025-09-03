@@ -103,7 +103,7 @@ export default function DialogDemo() {
           {invests.map((invest)=>(
             <div key={invest._id} className="flex items-center justify-between bg-muted/100 p-4 rounded-lg shadow-sm flex">
                 <a className="flex-1 text-sm">{invest.name}</a>
-                <a className="flex-1 text-sm">{invest.percentage}</a>
+                <a className="flex-1 text-sm">{invest.percentage}%</a>
                 <a className="w-4 h-4 rounded-md border mr-4"style={{backgroundColor:invest.color}}></a>   
                 <Button  className="bg-red-400 text-gray-900"onClick={()=>handelDelete(invest._id)}>Delete</Button>  
             </div>
