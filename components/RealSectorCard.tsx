@@ -59,7 +59,7 @@ useEffect(()=>{
                 className="w-2 h-2 rounded-full"
                 style={{backgroundColor:invest.color}}>
                 </span>
-                {invest.name}   {invest.percentage}
+                {invest.name}   {invest.percentage}%
             </div>
         ))}
         </div>

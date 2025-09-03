@@ -82,16 +82,16 @@ export default function DialogDemo() {
               <Label htmlFor="name-1">Sector Name</Label>
               <Input id="name-1" name="name" value={name} onChange={(e) => setName(e.target.value) }/>
             </div>
-            <div className="grid gap-3">
-              <Label htmlFor="username-1">Percentage Occupied by Sector</Label>
+            <div className="grid gap-3 flex flex-row">
+              <Label htmlFor="username-1 flex-1">Percentage Occupied by Sector <a className="text-sm text-gray-500 flex-1">without % </a></Label>
               <Input id="username-1" name="percentage" value={percentage}  onChange={(e) => setPercentage(e.target.value)}/>
             </div>
             <div className="grid gap-3">
-              <Label htmlFor="username-1">Value same as Pecentage</Label>
+              <Label htmlFor="username-1">Value same as Pecentage <a className="text-sm text-gray-500 flex-1">without % </a></Label>
               <Input id="username-1" name="value" value={value}onChange={(e) => setValue(e.target.value)}/>
             </div>
             <div className="grid gap-3">
-              <Label htmlFor="username-1">colour</Label>
+              <Label htmlFor="username-1">Colour for Indication</Label>
               <Input id="username-1" name="color "value={color} onChange={(e) => setColor(e.target.value)} />
             </div>
           </div>
