@@ -60,7 +60,7 @@ useEffect(()=>{
                 style={{backgroundColor:invest.color}}>
                 </span>
                 {invest.name}   {invest.percentage}%
-            </div>
+            </div>  
         ))}
         </div>
      

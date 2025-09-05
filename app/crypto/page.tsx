@@ -11,6 +11,7 @@ import {
   SidebarProvider,
 } from "@/components/ui/sidebar"
 import { getBinancePrices } from "@/lib/api/binance"
+import { Button } from "@/components/ui/button"
 
 const coins = ["BTC", "ETH", "BNB", "SOL", "XRP", "DOGE", "ADA", "DOT", "AVAX", "LINK", "TAO"]
 
@@ -29,6 +30,13 @@ export default function Page() {
     const interval = setInterval(fetchData, 3000)
     return () => clearInterval(interval)
   }, [prices])
+  
+ const [bdata, setBdata] = useState(null);
+
+  const fetchInvest = async () => {
+    alert("Connecting...");
+    
+  };
 
   return (
     <SidebarProvider>
@@ -36,11 +44,13 @@ export default function Page() {
       <SidebarInset>
         <MobileTopNavbar />
         <div className="pt-8 pb-20 px-4">
-          <div className="items-center">
+          <div className="flex flex-row">
+          <div className="items-center flex-1">
             <a className="text-white-500 text-center text-2xl text-green-400 font-sans font-medium tracking-tight">Live Crypto Prices</a><br/>
             <a className="text-white-500 text-center text-base font-semibold">Stay Ahead with Live Market Updates</a>
           </div>
-          
+          <Button onClick={fetchInvest}>Connect Wallet</Button>
+          </div>
             <div className="flex flex-1 flex-col gap-4 p-4">
             {coins.map((coin, index) => {
               const symbol = `${coin}USDT`
