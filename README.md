@@ -40,6 +40,7 @@ DATABASE_URL=your_neon_connection_string
 CLERK_SECRET_KEY=clerk_key
 NEXT_PUBLIC_CLERK_FRONTEND_API=your_clerk_frontend_api
 MONGO_DB_URL=mongo_db_cluster_url
+NEXT_PUBLIC_MORALIS_KEY=KEY
 ```
 
 4. **Run the development server**
