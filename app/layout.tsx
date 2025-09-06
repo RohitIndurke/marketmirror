@@ -1,6 +1,9 @@
 import "./globals.css";
 import Script from "next/script";
 import { ClerkProvider, SignedIn, UserButton } from "@clerk/nextjs";
+import { Providers } from "@/components/providers";
+import '@rainbow-me/rainbowkit/styles.css';
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -21,7 +24,9 @@ export default function RootLayout({
               <UserButton />
             </SignedIn>
           </header>
-          {children}
+          <Providers>
+            {children}
+          </Providers>  
         </body>
       </html>
     </ClerkProvider>
