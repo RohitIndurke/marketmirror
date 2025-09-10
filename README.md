@@ -19,6 +19,7 @@
  ![Clerk](https://img.shields.io/badge/Clerk-ffffff?style=for-the-badge&logo=clerk&logoColor=black) 
  ![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white) 
 ![MongoDB Atlas](https://img.shields.io/badge/MongoDB%20Atlas-47A248?style=for-the-badge&logo=mongodb&logoColor=white)
+![Rainbow](https://img.shields.io/badge/Rainbow-001D36?style=for-the-badge&logo=rainbow&logoColor=white)
 ---
 
 ## Getting Started
