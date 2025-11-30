@@ -16,6 +16,7 @@ const mutuals = [
 export async function GET() {
   const today = new Date();
   const day = today.getDay(); // 0=Sunday, 6=Saturday
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const results: any[] = [];
 
   for (const fund of mutuals) {
