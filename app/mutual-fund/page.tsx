@@ -43,11 +43,7 @@ const FundsPage = () => {
       try {
         const promises = mutuals.map(async (mutual) => {
           const url = `https://stock.indianapi.in/mutual_funds_details?stock_name=${encodeURIComponent(mutual)}`;
-          const req = await fetch(url, {
-            headers: {
-              "X-Api-Key": process.env.NEXT_PUBLIC_MUTUAL_API || "",
-            },
-          });
+          const req = await fetch(url);
           const data = await req.json();
           return data;
         });

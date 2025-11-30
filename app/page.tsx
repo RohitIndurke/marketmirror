@@ -10,6 +10,7 @@ import RealSectorCard from "@/components/RealSectorCard";
 import InvestmentCard from "@/components/InvestmentCard";
 import NiftyGraph from "@/components/NiftyGraph";
 import Indicator from "@/components/Indicator";
+import Nav from "@/components/Nav";
 
 const Page = () => {
   const { isSignedIn, user } = useUser();
@@ -85,7 +86,7 @@ const Page = () => {
           </div>
 
           <Footer />
-          <MobileBottomNavbar />
+                    <MobileBottomNavbar />
         </SidebarInset>
       </SidebarProvider>
     </div>
