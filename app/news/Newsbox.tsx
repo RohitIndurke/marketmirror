@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { Card } from "@/components/ui/card";
 import Link from "next/link";
+import Image from "next/image";
 
 
 interface Article {
@@ -31,9 +32,9 @@ function Page() {
   return (
     <div className="min-h-screen bg-background text-foreground p-6">
       <div className="items-center mb-5 ">
-            <a className="text-white-500 text-center text-2xl text-green-400 font-sans font-xl tracking-tight">Market News & Updates</a><br/>
-            <a className="text-white-500 text-center text-small font-semibold">Stay informed with the latest financial headlines and trends</a>
-          </div>
+        <a className="text-white-500 text-center text-2xl text-green-400 font-sans font-xl tracking-tight">Market News & Updates</a><br />
+        <a className="text-white-500 text-center text-small font-semibold">Stay informed with the latest financial headlines and trends</a>
+      </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {articles.map((article, index) => (
           <Card
@@ -41,24 +42,25 @@ function Page() {
             className="relative overflow-hidden rounded-xl shadow-lg bg-muted/30 h-[370px]"
           >
             <div className="absolute inset-0 z-0">
-            <img
-                src={ !article.image_url ? '/marketMirror.png':article.image_url}
+              <Image
+                src={!article.image_url ? '/marketMirror.png' : article.image_url}
                 alt="News image"
-                className="w-full h-full object-cover"
-                height={10}
-                width={20}
+                className="object-cover"
+                fill
+                unoptimized
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
             </div>
 
             {article.source_icon && article.source_url && (
               <Link href={article.source_url} target="_blank">
-                <img
+                <Image
                   src={article.source_icon}
                   alt="Source logo"
-                  className="w-8 h-8 absolute top-3 left-3 bg-white p-1 rounded shadow-md z-10"
-                  height={10}
-                width={20}
+                  className="absolute top-3 left-3 bg-white p-1 rounded shadow-md z-10"
+                  height={32}
+                  width={32}
+                  unoptimized
                 />
               </Link>
             )}

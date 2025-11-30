@@ -11,7 +11,7 @@ const Indicator = () => {
     const get = async () => {
       const req = await fetch("/api/sector");
       const data = await req.json();
-      console.log("Here is total sector holdings:",totalHolding);
+      console.log("Here is total sector holdings:", data.length);
       setTotalHolding(data.length);
     };
     get();

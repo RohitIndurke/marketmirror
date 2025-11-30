@@ -1,31 +1,11 @@
-"use client"
-import MobileTopNavbar from "@/components/MobileTopNavbar"
-import MobileBottomNavbar from "@/components/MobileBottomNavbar"
-import { AppSidebar } from "@/components/app-sidebar"
-import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar"
-import Footer from "@/components/Fotter"
-import Newsbox from "@/app/news/Newsbox"
+import NewsClient from "@/app/news/news-client";
+import { Metadata } from "next";
 
+export const metadata: Metadata = {
+  title: "Market News | MarketMirror",
+  description: "Latest market news and updates. Stay informed with real-time financial news.",
+};
 
-
-
-
-
-const News = () =>{
-
-    return(
-        <SidebarProvider>
-        <AppSidebar />
-        <SidebarInset>
-          <MobileTopNavbar  />
-           
-          <div className="row">
-          <Newsbox/>
-          </div>
-      <Footer/>
-      <MobileBottomNavbar />
-        </SidebarInset>
-      </SidebarProvider>
-    )
+export default function Page() {
+  return <NewsClient />;
 }
-export default News;
