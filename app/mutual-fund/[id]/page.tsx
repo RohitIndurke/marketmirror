@@ -2,16 +2,18 @@ import { Metadata } from "next";
 import FundDetails from "./fund-details";
 
 type Props = {
-    params: { id: string };
+    params: Promise<{ id: string }>;
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
+    const { id } = await params;
     return {
-        title: `Mutual Fund ${params.id} | MarketMirror`,
-        description: `Detailed performance and risk analysis for Mutual Fund ${params.id} on MarketMirror.`,
+        title: `Mutual Fund ${id} | MarketMirror`,
+        description: `Detailed performance and risk analysis for Mutual Fund ${id} on MarketMirror.`,
     };
 }
 
-export default function Page({ params }: Props) {
-    return <FundDetails id={params.id} />;
+export default async function Page({ params }: Props) {
+    const { id } = await params;
+    return <FundDetails id={id} />;
 }
