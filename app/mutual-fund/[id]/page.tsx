@@ -1,27 +1,17 @@
-"use client"
+import { Metadata } from "next";
+import FundDetails from "./fund-details";
 
-import { AppSidebar } from "@/components/app-sidebar";
-import Footer from "@/components/Fotter";
-import MobileBottomNavbar from "@/components/MobileBottomNavbar";
-import MobileTopNavbar from "@/components/MobileTopNavbar";
-import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
-const FundsPage = () => {
+type Props = {
+    params: { id: string };
+};
 
-         
-    return(
-        <>
-         <SidebarProvider>
-    <AppSidebar />
-    <SidebarInset>
-    <MobileTopNavbar />
-     
-   
-    <Footer/>
-    <MobileBottomNavbar />
-    </SidebarInset>
-    </SidebarProvider>
-        </>
-    )
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+    return {
+        title: `Mutual Fund ${params.id} | MarketMirror`,
+        description: `Detailed performance and risk analysis for Mutual Fund ${params.id} on MarketMirror.`,
+    };
 }
-export default FundsPage;
 
+export default function Page({ params }: Props) {
+    return <FundDetails id={params.id} />;
+}

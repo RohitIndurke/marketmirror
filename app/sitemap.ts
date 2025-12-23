@@ -26,5 +26,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
             changeFrequency: 'daily',
             priority: 0.8,
         },
+        {
+            url: 'https://marketmirror.vercel.app/indian',
+            lastModified: new Date(),
+            changeFrequency: 'daily',
+            priority: 0.8,
+        },
     ]
 }
