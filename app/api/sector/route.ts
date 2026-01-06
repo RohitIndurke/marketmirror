@@ -5,6 +5,7 @@ import { auth } from "@clerk/nextjs/server";
 
 export const GET = async () => {
   try {
+    
     await connectDB();
     const { userId: clerkId } = await auth();
     const sectors = await Sector.find({ clerkId });
