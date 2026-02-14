@@ -1,8 +1,9 @@
 "use client"
-import { PieChart, Pie, Cell, ResponsiveContainer} from "recharts"
+
+import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from "recharts"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import {useState,useEffect} from 'react'
-import  Dialog  from "@/components/Dialog";
+import { useState, useEffect } from 'react'
+import Dialog from "@/components/Dialog";
 
 interface Invest {
   _id: string,
@@ -12,60 +13,74 @@ interface Invest {
   color: string
 }
 
-
-
-
 const RealSectorCard = () => {
-  const [invests,setInvests] = useState<Invest[]>([]);
+  const [invests, setInvests] = useState<Invest[]>([]);
 
-useEffect(()=>{
+  useEffect(() => {
+    const GET = async () => {
+      try {
+        const req = await fetch("/api/sector");
+        if (req.ok) {
+          const data = await req.json();
+          setInvests(data);
+        }
+      } catch (error) {
+        console.error("Failed to fetch sector data", error);
+      }
+    };
+    GET();
+  }, [])
 
-  const GET = async()=>{
-    const req = await fetch("/api/sector");
-    const data = await req.json();
-    setInvests(data)
-  };
-  GET();
-},[])
+  return (
+    <Card className="h-full shadow-sm hover:shadow-md transition-shadow">
+      <CardHeader className="pb-2 flex flex-row items-center justify-between space-y-0">
+        <CardTitle className="text-lg font-semibold">Personal Holdings</CardTitle>
+        <Dialog />
+      </CardHeader>
+      <CardContent>
+        <div className="flex flex-col items-center gap-6">
+          <div className="h-[200px] w-full relative max-w-[200px]">
+            <ResponsiveContainer width="100%" height="100%">
+              <PieChart>
+                <Pie
+                  data={invests}
+                  cx="50%"
+                  cy="50%"
+                  innerRadius={60}
+                  outerRadius={80}
+                  paddingAngle={2}
+                  dataKey="value"
+                  stroke="none"
+                >
+                  {invests.map((invest, index) => (
+                    <Cell key={`cell-${index}`} fill={invest.color} />
+                  ))}
+                </Pie>
+                <Tooltip
+                  contentStyle={{ background: "#fff", border: "1px solid #eee", borderRadius: "8px", fontSize: "12px" }}
+                  formatter={(value: number, name: string, props: { payload?: Invest }) => [`${value}`, props.payload?.percentage ? `${props.payload.percentage}%` : '']}
+                />
+              </PieChart>
+            </ResponsiveContainer>
+            {/* Center Label if needed */}
+          </div>
 
-
-    return(
-  <Card className="p-2 h-[250px] w-[345px] shadow-md rounded-xl relative">
-    <CardHeader className="p-2">
-      <CardTitle className="text-sm text-left flex"><a className="flex-2">Personal Holdings💼</a>
-      <a className="text-right flex-2"><Dialog/></a></CardTitle>
-    </CardHeader>
-    <CardContent className="relative">
-      <ResponsiveContainer width="100%" height={140}>
-        <PieChart>
-          <Pie
-            data={invests}
-            cx="75%"
-            cy="49.8%"
-            outerRadius={70}
-            innerRadius={35}
-            dataKey="value"
-          >{invests.map((invest,index)=>(
-              <Cell key={`cell-${index}`} fill={invest.color}/> 
-          ))}
-              
-          </Pie>
-        </PieChart>
-      </ResponsiveContainer>
-      <div className="absolute bottom-2 left-2 text-[10px] flex flex-col gap-1">
-        {invests.map((invest,index)=>(
-            <div key={index} className="flex items-center gap-1">
+          <div className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm w-full">
+            {invests.map((invest, index) => (
+              <div key={index} className="flex items-center gap-2">
                 <span
-                className="w-2 h-2 rounded-full"
-                style={{backgroundColor:invest.color}}>
-                </span>
-                {invest.name}   {invest.percentage}%
-            </div>  
-        ))}
+                  className="w-2.5 h-2.5 rounded-full shrink-0"
+                  style={{ backgroundColor: invest.color }}
+                />
+                <span className="text-muted-foreground truncate">{invest.name}</span>
+                <span className="font-medium ml-auto text-xs">{invest.percentage}%</span>
+              </div>
+            ))}
+          </div>
         </div>
-     
-    </CardContent>
-  </Card>
-)
+      </CardContent>
+    </Card>
+  )
 }
+
 export default RealSectorCard

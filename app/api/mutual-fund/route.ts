@@ -2,6 +2,11 @@ import { NextResponse } from "next/server";
 import Redis from "ioredis";
 
 const redis = new Redis(process.env.REDIS_URL || "redis://127.0.0.1:6379");
+redis.on('error', (err) => {
+  // Suppress connection errors during build or if Redis is not available locally
+  console.warn("Redis connection error:", err.message);
+});
+
 
 const mutuals = [
   "SBI Small Cap Fund",

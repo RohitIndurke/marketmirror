@@ -8,16 +8,17 @@ import {
   SidebarContent,
   SidebarGroup,
   SidebarGroupContent,
-  SidebarGroupLabel,
+  SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
-  SidebarMenuItem, 
+  SidebarMenuItem,
+  SidebarTrigger,
 } from "@/components/ui/sidebar"
 import Link from 'next/link'
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs"
 
 const items = [
- {
+  {
     title: "Home",
     url: "./",
     icon: Home,
@@ -42,25 +43,27 @@ const items = [
 
 export function AppSidebar() {
   return (
-    <Sidebar>
+    <Sidebar collapsible="icon">
+      <SidebarHeader className="flex flex-row items-center justify-between p-4 group-data-[collapsible=icon]:p-2 group-data-[collapsible=icon]:justify-center">
+        <Link href="/" className="group-data-[collapsible=icon]:hidden">
+          <Image
+            src={marketMirror}
+            alt="Market Mirror Logo"
+            width={140}
+            height={40}
+            className="object-contain"
+          />
+        </Link>
+        <SidebarTrigger className="text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground" />
+      </SidebarHeader>
+
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel className="flex justify-center mb-4">
-            <Link href="/">
-              <Image
-                src={marketMirror}
-                alt="Market Mirror Logo"
-                width={160}
-                height={44}
-                className="object-contain"
-              />
-            </Link>
-          </SidebarGroupLabel>
-
           <SidebarGroupContent>
-            <SidebarMenu>              {items.map((item) => (
+            <SidebarMenu>
+              {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
+                  <SidebarMenuButton asChild tooltip={item.title}>
                     <Link href={item.url}>
                       <item.icon />
                       <span>{item.title}</span>
@@ -70,20 +73,20 @@ export function AppSidebar() {
               ))}
 
               <SidebarMenuItem>
-                <SidebarMenuButton>
+                <SidebarMenuButton tooltip="Sign In / Profile">
                   <SignedOut>
                     <SignInButton mode="modal">
-                      <div className="flex items-center gap-2 cursor-pointer">
-                        <User className="w-5 h-5" />
+                      <div className="flex items-center gap-2 cursor-pointer w-full">
+                        <User className="w-4 h-4" />
                         <span>Sign in</span>
                       </div>
                     </SignInButton>
                   </SignedOut>
 
                   <SignedIn>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2 w-full">
                       <UserButton />
-                      <span>profile</span>
+                      <span>Profile</span>
                     </div>
                   </SignedIn>
                 </SidebarMenuButton>

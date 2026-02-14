@@ -42,15 +42,7 @@
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
 }
-.tereNam{
-  background-color:blue;
-  box-align:center;
-  height:30px;
-  width:100%;
-  padding:10px;
-  border:5px red solid;
 
-}
 
 :root {
   --radius: 0.625rem;
@@ -130,14 +122,6 @@
   }
 }
 
-.indian{
-  font-size:50px;
-  margin-top:60px;
-  background-color:red
-}
-.pad{
-  padding-top:60px
-}
 @keyframes scroll {
   0% {
     transform: translateX(0%);
@@ -151,3 +135,4 @@
   display: flex;
   animation: scroll 20s linear infinite;
 }
+
