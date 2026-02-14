@@ -58,7 +58,7 @@ const RealSectorCard = () => {
                 </Pie>
                 <Tooltip
                   contentStyle={{ background: "#fff", border: "1px solid #eee", borderRadius: "8px", fontSize: "12px" }}
-                  formatter={(value: number, name: string, props: any) => [`${value}`, props.payload.percentage ? `${props.payload.percentage}%` : '']}
+                  formatter={(value: number, name: string, props: { payload?: Invest }) => [`${value}`, props.payload?.percentage ? `${props.payload.percentage}%` : '']}
                 />
               </PieChart>
             </ResponsiveContainer>
