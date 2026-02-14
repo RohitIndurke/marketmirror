@@ -58,6 +58,7 @@ const RealSectorCard = () => {
                 </Pie>
                 <Tooltip
                   contentStyle={{ background: "#fff", border: "1px solid #eee", borderRadius: "8px", fontSize: "12px" }}
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
                   formatter={(value: any, name: any, props: any) => [`${value}`, props.payload?.percentage ? `${props.payload.percentage}%` : '']}
                 />
               </PieChart>

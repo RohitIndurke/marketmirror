@@ -37,6 +37,7 @@ const InvestmentCard = () => {
                 </Pie>
                 <Tooltip
                   contentStyle={{ background: "#fff", border: "1px solid #eee", borderRadius: "8px", fontSize: "12px" }}
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
                   formatter={(value: any) => [`${value.toFixed(2)}%`, 'Weight']}
                 />
               </PieChart>
